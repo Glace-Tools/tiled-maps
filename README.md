@@ -10,6 +10,8 @@ Create a file in Tiled (available [here](https://www.mapeditor.org/)):
 + Map size: Fixed, width and height can be whatever you want
 + Tile size: 32x32 px
 
+You should use the tilesets included in this repository. If you use one from somewhere else, the R code might not work properly.
+
 You can only use one zone's tileset for the foreground (you can use a different one in the background, but that needs to be a separate file). Make sure to add this first (in the tilesets window, click the arrow in the top right and add external tileset).
 
 Design your level! Make sure there are 4 layers (use the default "Tile Layer 1,2,3,4" names). Glace will pass through all tiles except those in Layer 3. For entities, add the "Enemies and Objects" tileset (after adding the level tileset). Create an Object Layer, and place the entities in that layer. Don't put enemies in a tile layer! Make sure to include a Glace entity; this is the starting location.
@@ -35,7 +37,7 @@ You will need to edit the first section of the R script before running it. This 
 
 #### Set paths
 
-NOTE: Paths will need forward slashes ("/") instead of back slashes ("\").
+NOTE: Paths will need forward slashes ("/") instead of back slashes ("\\").
 
 + tmxPath: This is the path to your Tiled .tmx file (including the .tmx extension) that you wish to convert.
 + bgTmxPath: This is the path to your .tmx file to be used as the background. NOTE: The dimensions of the background .tmx file must be exactly half that of the map file in both X and Y (e.g. a map that is 1000x60 must have a background of 500x30). Also note that Tiled counts coordinates from 0, so the last coordinate will be the map size minus 1.
