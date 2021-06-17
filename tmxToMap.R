@@ -1,12 +1,11 @@
 ##TODO##
 #Maybe fix numbering of tilesets and BG tilesets
-#Maybe make different number of layers possible?
 #What does each parallax value do specifically?
 
 #NOTES:
 #Only first objectgroup gets read
 #Only first Glace (GID = 130) gets read (must be in first objectgroup)
-#Map tileset must have 128 tiles (i.e. 'firstGID' of first objectgroup must be 129)
+#Map tileset must have 128 tiles (and 'firstGID' of first objectgroup must be 129)
 #Only the first 4 tile layers (by 'id' value) will be read
 #Only the first 3 BG layers (by 'id' value) will be read
 
@@ -37,9 +36,6 @@ bgZone    = "Lab"
 #Set beads:
 numBeads = 1
 
-#Set number of layers:
-numLayers = 4 #Make sure to have 4 layers??
-
 #Set SFX and sec values:
   #Sec values are seconds between sfx playing
   #Set sfx and sec to 0 for unused slots
@@ -57,7 +53,6 @@ sec4 = 11
 
 #Set parallax values:
   #Must be between 0 and 1
-  #?Apply to BG layers 1, 2, and 3 respectively?
 parallax1 = 0.10
 parallax2 = 0.34
 parallax3 = 0.61
@@ -154,7 +149,7 @@ rm(layer1Tiles, layer2Tiles, layer3Tiles, layer4Tiles)
 
 #Convert layer tile IDs from Tiled format to Glace format
 #Maybe unnecessary if correct tilesets are used
-for(i in 1:numLayers){
+for(i in 1:4){
   layersTiles[[i]][layersTiles[[i]] == 0] <- NA
   layersTiles[[i]] = layersTiles[[i]] - 1
   layersTiles[[i]][is.na(layersTiles[[i]])] <- 0
@@ -232,7 +227,7 @@ writeBin(as.integer(c(numBead1, numBead2, numBead3, numBead4)),
          newMap, size = 4, endian = 'little')                                   #0xE8 - 0xF7
 
 #Write number of layers
-writeBin(as.integer(numLayers), newMap, size = 1)                               #0xF8
+writeBin(as.integer(4), newMap, size = 1)                                       #0xF8
 
 #Write map size and parallax values
 writeBin(as.integer(c(mapWidth, mapHeight)),
@@ -248,7 +243,7 @@ for(i in 1:numActors) writeBin(as.integer(actorInfo[i,]),
                                newMap, size = 4, endian = 'little')             #0x111 - 
 
 #Write map tiles
-for(z in 1:numLayers){
+for(z in 1:4){
   for(y in 1:mapHeight){
     for(x in 1:mapWidth){
       writeBin(as.integer(layersTiles[[z]][y,x]), newMap, size = 1)
