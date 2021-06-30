@@ -5,7 +5,7 @@ The aim of this conversion tool is to allow custom maps made in Tiled to be impo
 
 ##### Notes:
 
-+ I'm not sure exactly how the game knows when the end of the level is reached. Depending on that some changes to the code may need to be made.
++ The end of each stage is hard-coded as an "invisible wall", i.e. when Glace's x-coordinate is greater than a certain value the stage is completed. I don't know what the specific values are for each stage yet.
 + The "Enemies and Objects" tileset doesn't contain every object, but should contain all the ones you would include (the others are things like projectiles). If the remaining objects are added to the tileset, make sure their ID values match those in the "glace_objects.txt" file.
 + If you add beads to the map, they don't seem to work as expected. They all immediately teleport to Glace. It hasn't been tested with multiple of the same bead, or the 4th bead, so those situations might cause unexpected behavior.
 
@@ -17,7 +17,7 @@ Create a file in Tiled (available [here](https://www.mapeditor.org/)):
 + Orientation: Orthogonal
 + Tile layer format: CSV
 + Tile render order: Right Down
-+ Map size: Fixed, width and height can be whatever you want
++ Map size: Fixed, width and height can be whatever you want (I think)
 + Tile size: 32x32 px
 
 You should use the tilesets included in this repository. If you use one from somewhere else, the R code might not work properly.
